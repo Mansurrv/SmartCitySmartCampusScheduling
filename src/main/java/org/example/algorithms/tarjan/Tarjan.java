@@ -1,15 +1,17 @@
 package org.example.algorithms.tarjan;
 
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.Scanner;
-import java.util.Stack;
+import java.util.*;
 
 public class Tarjan {
     private int V;
 
     private final LinkedList<Integer>[] adj;
     private int time;
+
+    private final List<List<Integer>> StronglyCC;
+
+    private final int[] compID;
+    private int curIDX;
 
 
     @SuppressWarnings("unchecked") Tarjan(int v) {
@@ -21,6 +23,10 @@ public class Tarjan {
         }
 
         time = 0;
+
+        StronglyCC = new ArrayList<>();
+        compID = new int[V];
+        curIDX = 0;
     }
 
 
@@ -50,14 +56,19 @@ public class Tarjan {
             }
         }
 
-        int w = -1;
         if (low[u] == disc[u]) {
+            List<Integer> scc = new ArrayList<>();
+            int w = -1;
             while (w != u) {
                 w = (int)stack.pop();
+                scc.add(w);
                 System.out.print(w + " ");
                 stackMember[w] = false;
+                compID[w] = curIDX;
             }
             System.out.println();
+            StronglyCC.add(scc);
+            curIDX++;
         }
     }
 
@@ -80,6 +91,9 @@ public class Tarjan {
         }
     }
 
+    public int[] getCompID() {
+        return compID;
+    }
 
     public static void main(String[] args) {
         Tarjan tarjan = new Tarjan(5);
