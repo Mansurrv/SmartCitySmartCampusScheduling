@@ -105,9 +105,9 @@ public class Main {
                     topoOrder.toString(),
                     dagSPTime,
                     dagSolverShortest.getRelaxationCount(),
-                    lpResult.length,
-                    lpResult.componentPath.toString(),
-                    lpResult.taskPath.toString()
+                    lpResult.length(),
+                    lpResult.componentPath().toString(),
+                    lpResult.taskPath().toString()
             );
 
             writer.write(row);
