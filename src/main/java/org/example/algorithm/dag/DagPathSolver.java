@@ -22,21 +22,10 @@ public class DagPathSolver {
         public WeightedCompEdge(int toComp, int weight) { this.toComp = toComp; this.weight = weight; }
     }
 
-    public static class PathResult {
-        public final int length;
-        public final List<Integer> componentPath;
-        public final List<Integer> taskPath;
-        public PathResult(int length, List<Integer> componentPath, List<Integer> taskPath) {
-            this.length = length; this.componentPath = componentPath; this.taskPath = taskPath;
-        }
+    public record PathResult(int length, List<Integer> componentPath, List<Integer> taskPath) {
     }
 
-    public static class ShortestPathResult {
-        public final Map<Integer, Integer> distances;
-        public final Map<Integer, Integer> predecessor;
-        public ShortestPathResult(Map<Integer, Integer> distances, Map<Integer, Integer> predecessor) {
-            this.distances = distances; this.predecessor = predecessor;
-        }
+    public record ShortestPathResult(Map<Integer, Integer> distances, Map<Integer, Integer> predecessor) {
     }
 
     public enum Mode { SHORTEST, LONGEST }
@@ -118,8 +107,8 @@ public class DagPathSolver {
 
         List<Integer> compPath = new ArrayList<>();
         Integer cur = endComp;
-        while (cur != null && cur != -1 && cur != startComp) { compPath.add(0, cur); cur = predecessor.get(cur); }
-        if (cur != null && cur == startComp) compPath.add(0, startComp);
+        while (cur != null && cur != -1 && cur != startComp) { compPath.addFirst(cur); cur = predecessor.get(cur); }
+        if (cur != null && cur == startComp) compPath.addFirst(startComp);
 
         List<Integer> taskPath = new ArrayList<>();
         for (int c : compPath) taskPath.addAll(sccs.get(c));

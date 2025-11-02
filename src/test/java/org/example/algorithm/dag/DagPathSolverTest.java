@@ -26,9 +26,9 @@ class DagPathSolverTest {
         DagPathSolver solver = new DagPathSolver(edges, sccId, sccs, topoOrder, DagPathSolver.Mode.SHORTEST);
         DagPathSolver.ShortestPathResult sp = solver.shortestPath(0);
 
-        assertEquals(0, sp.distances.get(0));
-        assertEquals(5, sp.distances.get(1));
-        assertEquals(15, sp.distances.get(2));
+        assertEquals(0, sp.distances().get(0));
+        assertEquals(5, sp.distances().get(1));
+        assertEquals(15, sp.distances().get(2));
         assertEquals(2, solver.getRelaxationCount());
     }
 
@@ -52,9 +52,9 @@ class DagPathSolverTest {
         DagPathSolver solver = new DagPathSolver(edges, sccId, sccs, topoOrder, DagPathSolver.Mode.LONGEST);
         DagPathSolver.PathResult lp = solver.longestPath(0);
 
-        assertEquals(6, lp.length);
-        assertEquals(Arrays.asList(0, 1, 3), lp.componentPath);
-        assertEquals(Arrays.asList(0, 1, 3), lp.taskPath);
+        assertEquals(6, lp.length());
+        assertEquals(Arrays.asList(0, 1, 3), lp.componentPath());
+        assertEquals(Arrays.asList(0, 1, 3), lp.taskPath());
         assertEquals(3, solver.getRelaxationCount());
     }
 
@@ -75,13 +75,13 @@ class DagPathSolverTest {
 
         DagPathSolver lpSolver = new DagPathSolver(edges, sccId, sccs, topoOrder, DagPathSolver.Mode.LONGEST);
         DagPathSolver.PathResult lp = lpSolver.longestPath(0);
-        assertEquals(8, lp.length);
-        assertEquals(Arrays.asList(0, 1, 2), lp.componentPath);
+        assertEquals(8, lp.length());
+        assertEquals(Arrays.asList(0, 1, 2), lp.componentPath());
 
         DagPathSolver spSolver = new DagPathSolver(edges, sccId, sccs, topoOrder, DagPathSolver.Mode.SHORTEST);
         DagPathSolver.ShortestPathResult sp = spSolver.shortestPath(0);
-        assertEquals(2, sp.distances.get(1));  // minimum weight among 0->1 edges
-        assertEquals(5, sp.distances.get(2));  // shortest path: 0->1->2
+        assertEquals(2, sp.distances().get(1));  // minimum weight among 0->1 edges
+        assertEquals(5, sp.distances().get(2));  // shortest path: 0->1->2
     }
 
     @Test
@@ -99,7 +99,7 @@ class DagPathSolverTest {
 
         DagPathSolver solver = new DagPathSolver(edges, sccId, sccs, topoOrder, DagPathSolver.Mode.SHORTEST);
         DagPathSolver.ShortestPathResult sp = solver.shortestPath(0);
-        assertEquals(DagPathSolver.INF, sp.distances.get(2));
+        assertEquals(DagPathSolver.INF, sp.distances().get(2));
     }
 
     @Test
@@ -115,8 +115,8 @@ class DagPathSolverTest {
         DagPathSolver lpSolver = new DagPathSolver(edges, sccId, sccs, topoOrder, DagPathSolver.Mode.LONGEST);
         DagPathSolver.PathResult lp = lpSolver.longestPath(0);
 
-        assertEquals(0, sp.distances.get(0));
-        assertEquals(0, lp.length);
-        assertEquals(Collections.singletonList(0), lp.componentPath);
+        assertEquals(0, sp.distances().get(0));
+        assertEquals(0, lp.length());
+        assertEquals(Collections.singletonList(0), lp.componentPath());
     }
 }
