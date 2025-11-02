@@ -1,0 +1,10 @@
+Dataset,Nodes,Edges,SCCs,CriticalPathLength,Time(ms),DFS_Visits,Edges_Traversed,Kahn_Pushes,Kahn_Pops,Relaxations
+Graph 1,9,8,9,3,10,9,8,9,9,5
+Graph 2,8,8,8,4,1,8,8,8,8,6
+Graph 3,9,18,1,9,1,9,18,1,1,0
+Graph 4,16,8,16,3,1,16,8,16,16,9
+Graph 5,17,13,17,5,2,17,13,17,17,11
+Graph 6,17,90,1,17,1,17,90,1,1,0
+Graph 7,43,45,35,13,3,43,45,35,35,30
+Graph 8,44,49,44,6,4,44,49,44,44,45
+Graph 9,42,130,5,41,2,42,130,5,5,5
