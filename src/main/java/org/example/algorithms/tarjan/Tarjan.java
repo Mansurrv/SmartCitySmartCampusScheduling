@@ -1,11 +1,13 @@
 package org.example.algorithms.tarjan;
 
+import org.example.algorithms.CGBuilder.CGBuilder;
+
 import java.util.*;
 
 public class Tarjan {
     private int V;
 
-    private final LinkedList<Integer>[] adj;
+    public final LinkedList<Integer>[] adj;
     private int time;
 
     private final List<List<Integer>> StronglyCC;
@@ -73,7 +75,7 @@ public class Tarjan {
     }
 
 
-    void SCC() {
+    public List<List<Integer>> SCC() {
         int[] disc = new int[V];
         int[] low = new int[V];
         for (int i = 0; i < V; i++) {
@@ -89,6 +91,8 @@ public class Tarjan {
                 SccUtil(i, low, disc, stackMember, stack);
             }
         }
+
+        return StronglyCC;
     }
 
     public int[] getCompID() {
@@ -103,6 +107,12 @@ public class Tarjan {
         tarjan.addEdge(2,1);
         tarjan.addEdge(0,3);
         tarjan.addEdge(3,4);
+
+        List<List<Integer>> stronglyCC = tarjan.SCC();
+        int[] compID = tarjan.getCompID();
+        int numScc = stronglyCC.size();
+
+        List<List<Integer>> builder = CGBuilder.build(List.of(tarjan.adj), compID, numScc);
 
         System.out.println("SSC in this graph ");
         tarjan.SCC();
