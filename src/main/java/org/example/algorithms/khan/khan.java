@@ -1,4 +1,4 @@
-package org.example.algorithms;
+package org.example.algorithms.khan;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
